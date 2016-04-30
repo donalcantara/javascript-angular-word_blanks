@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+  <!-- Latest compiled and minified JavaScript -->
+  
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous">
+  </script>  
+  <link href='https://fonts.googleapis.com/css?family=Sigmar+One|Alegreya+SC' rel='stylesheet' type='text/css'>
+ <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+ <link rel="stylesheet" href="/animate.css">
+ <!-- THESE TWO VERSIONS BELOW MUST MATCH!!!! -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-route.min.js"></script>
+    <script>
+    //  inject the ngRoute dependency in the module.
+    var myApp = angular.module('myApp', ['ngRoute']);
+    //  use the config method to set up routing:
+      myApp.config(function ($routeProvider) {
+        $routeProvider
+          .when('/',{
+              templateUrl: 'partials/home.html'
+          })
+          .when('/pirates',{
+              templateUrl: 'partials/pirates.html'
+          })
+          .when('/story',{
+              templateUrl: 'partials/story.html'
+          })
+          .when('/travel',{
+              templateUrl: 'partials/travel.html'
+          })
+          .when('/roadtrip',{
+              templateUrl: 'partials/roadtrip.html'
+          })
+          .when('/ghosts',{
+              templateUrl: 'partials/ghosts.html'
+          })
+          .otherwise({
+            redirectTo: '/'
+          });
+      });
+      
+      myApp.factory('pirateFactory', function (){
+          // The factory is nothing more than a function that returns an object
+        var pirates = [];
+        var factory = {};
+        // Add a getStudents key to the factory object with a value of a function.
+        factory.getPirates = function (callback){
+            // Pass the students to a callback to be used by whoever calls the method
+            callback(pirates);
+        }
+        factory.addPirate = function(pirate){
+          pirates.push(pirate);
+        }
+          // Most important step: return the object so it can be used by the rest of our angular code
+        return factory;
+      });
+
+      myApp.controller('piratesController', function ($scope, pirateFactory, $location){
+        
+        $scope.newPirate = {};
+        $scope.pirates = [];
+        pirateFactory.getPirates(function (data){
+            $scope.pirates = data;
+        })
+
+        $scope.addPirate = function(){
+          console.log($scope.newPirate);
+          pirateFactory.addPirate($scope.newPirate);
+          $location.path('/story')
+        }
+      });
+    //  build the controllers
+      myApp.controller('view1Controller', function ($scope) {
+      });
+      myApp.controller('view2Controller', function ($scope, pirateFactory) {
+
+          $scope.pirates = [];
+          pirateFactory.getPirates(function (data){
+          $scope.pirates = data;
+        })
+      });
+
+    </script>
+<style>
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    display: inline;
+    padding-left: 50px;
+}
+</style>
+  </head>
+
+<body>
+    <div ng-app='myApp'>
+<center><h1 style="font-family: 'Sigmar One', cursive; font-size: 70px;" class="animated fadeInDown">Word Blanks!</h1>
+<ul>
+  <li><a href="#/pirates"><i class="fa fa-ship fa-5x" aria-hidden="true"></i></a></li>
+  <li><a href="#/travel"><i class="fa fa-clock-o fa-5x" aria-hidden="true"></i></a></li>
+  <li><a href="#/roadtrip"><i class="fa fa-car fa-5x" aria-hidden="true"></i></a></li>
+  <li><a href="#/ghosts"><i class="fa fa-snapchat-ghost fa-5x" aria-hidden="true"></i></a></li>
+</ul></center>
+        <div ng-view="">
+        </div>
+</div>
+  </body>
+</html>
