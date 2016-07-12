@@ -27,17 +27,26 @@
           .when('/pirates',{
               templateUrl: 'partials/pirates.html'
           })
-          .when('/story',{
-              templateUrl: 'partials/story.html'
+          .when('/pirateStory',{
+              templateUrl: 'partials/pirateStory.html'
           })
-          .when('/travel',{
-              templateUrl: 'partials/travel.html'
+          .when('/timeTravel',{
+              templateUrl: 'partials/timeTravel.html'
+          })
+          .when('/timeTravelStory',{
+              templateUrl: 'partials/timeTravelStory.html'
           })
           .when('/roadtrip',{
               templateUrl: 'partials/roadtrip.html'
           })
           .when('/ghosts',{
               templateUrl: 'partials/ghosts.html'
+          })
+          .when('/roadTripStory',{
+              templateUrl: 'partials/roadTripStory.html'
+          })
+          .when('/ghostStory',{
+              templateUrl: 'partials/ghostStory.html'
           })
           .otherwise({
             redirectTo: '/'
@@ -60,6 +69,22 @@
         return factory;
       });
 
+      myApp.factory('ghostFactory', function (){
+          // The factory is nothing more than a function that returns an object
+        var ghosts = [];
+        var factory = {};
+        // Add a getStudents key to the factory object with a value of a function.
+        factory.getGhosts = function (callback){
+            // Pass the students to a callback to be used by whoever calls the method
+            callback(ghosts);
+        }
+        factory.addGhost = function(ghost){
+          ghosts.push(ghost);
+        }
+          // Most important step: return the object so it can be used by the rest of our angular code
+        return factory;
+      });
+
       myApp.controller('piratesController', function ($scope, pirateFactory, $location){
         
         $scope.newPirate = {};
@@ -71,20 +96,40 @@
         $scope.addPirate = function(){
           console.log($scope.newPirate);
           pirateFactory.addPirate($scope.newPirate);
-          $location.path('/story')
+          $location.path('/pirateStory')
+        }
+      });
+
+      myApp.controller('ghostsController', function ($scope, ghostFactory, $location){
+        
+        $scope.newGhost = {};
+        $scope.ghosts = [];
+        ghostFactory.getGhosts(function (data){
+            $scope.ghosts = data;
+        })
+
+        $scope.addGhost = function(){
+          console.log($scope.newGhost);
+          ghostFactory.addGhost($scope.newGhost);
+          $location.path('/ghostStory')
         }
       });
     //  build the controllers
       myApp.controller('view1Controller', function ($scope) {
       });
-      myApp.controller('view2Controller', function ($scope, pirateFactory) {
 
-          $scope.pirates = [];
-          pirateFactory.getPirates(function (data){
-          $scope.pirates = data;
+      myApp.controller('view2Controller', function ($scope, pirateFactory) {
+        $scope.pirates = [];
+        pirateFactory.getPirates(function (data){
+        $scope.pirates = data;
         })
       });
-
+      myApp.controller('view3Controller', function ($scope, ghostFactory) {
+        $scope.ghosts = [];
+        ghostFactory.getGhosts(function (data){
+        $scope.ghosts = data;
+        })
+      });
     </script>
 <style>
 ul {
