@@ -36,8 +36,8 @@
           .when('/timeTravelStory',{
               templateUrl: 'partials/timeTravelStory.html'
           })
-          .when('/roadtrip',{
-              templateUrl: 'partials/roadtrip.html'
+          .when('/roadTrip',{
+              templateUrl: 'partials/roadTrip.html'
           })
           .when('/ghosts',{
               templateUrl: 'partials/ghosts.html'
@@ -68,7 +68,36 @@
           // Most important step: return the object so it can be used by the rest of our angular code
         return factory;
       });
-
+      myApp.factory('timeTravelFactory', function (){
+          // The factory is nothing more than a function that returns an object
+        var timeTravels = [];
+        var factory = {};
+        // Add a getStudents key to the factory object with a value of a function.
+        factory.getTimeTravels = function (callback){
+            // Pass the students to a callback to be used by whoever calls the method
+            callback(timeTravels);
+        }
+        factory.addTimeTravel = function(timeTravel){
+          timeTravels.push(timeTravel);
+        }
+          // Most important step: return the object so it can be used by the rest of our angular code
+        return factory;
+      });
+      myApp.factory('roadTripFactory', function (){
+          // The factory is nothing more than a function that returns an object
+        var roadTrips = [];
+        var factory = {};
+        // Add a getStudents key to the factory object with a value of a function.
+        factory.getRoadTrips = function (callback){
+            // Pass the students to a callback to be used by whoever calls the method
+            callback(roadTrips);
+        }
+        factory.addRoadTrip = function(roadTrip){
+          roadTrips.push(roadTrip);
+        }
+          // Most important step: return the object so it can be used by the rest of our angular code
+        return factory;
+      });
       myApp.factory('ghostFactory', function (){
           // The factory is nothing more than a function that returns an object
         var ghosts = [];
@@ -97,6 +126,34 @@
           console.log($scope.newPirate);
           pirateFactory.addPirate($scope.newPirate);
           $location.path('/pirateStory')
+        }
+      });
+      myApp.controller('roadTripsController', function ($scope, roadTripFactory, $location){
+        
+        $scope.newRoadTrip = {};
+        $scope.roadTrips = [];
+        roadTripFactory.getRoadTrips(function (data){
+            $scope.roadTrips = data;
+        })
+
+        $scope.addRoadTrip = function(){
+          console.log($scope.newRoadTrip);
+          roadTripFactory.addRoadTrip($scope.newRoadTrip);
+          $location.path('/roadTripStory')
+        }
+      });
+      myApp.controller('timeTravelsController', function ($scope, timeTravelFactory, $location){
+        
+        $scope.newTimeTravel = {};
+        $scope.timeTravels = [];
+        timeTravelFactory.getTimeTravels(function (data){
+            $scope.timeTravels = data;
+        })
+
+        $scope.addTimeTravel = function(){
+          console.log($scope.newTimeTravel);
+          timeTravelFactory.addTimeTravel($scope.newTimeTravel);
+          $location.path('/timeTravelStory')
         }
       });
 
@@ -130,6 +187,18 @@
         $scope.ghosts = data;
         })
       });
+      myApp.controller('view4Controller', function ($scope, roadTripFactory) {
+        $scope.roadTrips = [];
+        roadTripFactory.getRoadTrips(function (data){
+        $scope.roadTrips = data;
+        })
+      });
+      myApp.controller('view5Controller', function ($scope, timeTravelFactory) {
+        $scope.timeTravels = [];
+        timeTravelFactory.getTimeTravels(function (data){
+        $scope.timeTravels = data;
+        })
+      });
     </script>
 <style>
 ul {
@@ -150,8 +219,8 @@ li {
 <center><h1 style="font-family: 'Sigmar One', cursive; font-size: 70px;" class="animated fadeInDown">Word Blanks!</h1>
 <ul>
   <li><a href="#/pirates"><i class="fa fa-ship fa-5x" aria-hidden="true"></i></a></li>
-  <li><a href="#/travel"><i class="fa fa-clock-o fa-5x" aria-hidden="true"></i></a></li>
-  <li><a href="#/roadtrip"><i class="fa fa-car fa-5x" aria-hidden="true"></i></a></li>
+  <li><a href="#/timeTravel"><i class="fa fa-clock-o fa-5x" aria-hidden="true"></i></a></li>
+  <li><a href="#/roadTrip"><i class="fa fa-car fa-5x" aria-hidden="true"></i></a></li>
   <li><a href="#/ghosts"><i class="fa fa-snapchat-ghost fa-5x" aria-hidden="true"></i></a></li>
 </ul></center>
         <div ng-view="">
