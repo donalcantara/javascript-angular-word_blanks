@@ -108,7 +108,6 @@ var myApp = angular.module('myApp', ['ngRoute']);
     var factory = {};
     // Add a getStudents key to the factory object with a value of a function.
     factory.getGhosts = function (callback){
-        // Pass the students to a callback to be used by whoever calls the method
         callback(ghosts);
     }
     factory.addGhost = function(ghost){

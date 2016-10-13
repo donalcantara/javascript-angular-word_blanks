@@ -5,10 +5,11 @@
             	<p ng-repeat="timeTravel in timeTravels" class="animated infinite pulse" style="font-family: 'Alegreya SC', serif; font-size: 25px;">
                 <script type="text/javascript">
                 if ({{ timeTravel.TravelYear }} < {{ timeTravel.CurrentYear }}) {
-    {{ timeTravel.Period }} = "past";
-}
-              </script>{{ timeTravel.Period }}
-            	</p>
+    {{ timeTravel.Period }} = "past";}
+</script></p>
+{{ timeTravel.CurrentYear }}
+{{ timeTravel.Period }}
+{{ timeTravel.TravelYear }}
             	<a href="#/"><i class="fa fa-backward fa-5x" aria-hidden="true"></i></a>
             </div>
 		</div>
