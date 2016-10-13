@@ -13,193 +13,202 @@
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
  <link rel="stylesheet" href="/animate.css">
  <!-- THESE TWO VERSIONS BELOW MUST MATCH!!!! -->
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-route.min.js"></script>
-    <script>
-    //  inject the ngRoute dependency in the module.
-    var myApp = angular.module('myApp', ['ngRoute']);
-    //  use the config method to set up routing:
-      myApp.config(function ($routeProvider) {
-        $routeProvider
-          .when('/',{
-              templateUrl: 'partials/home.html'
-          })
-          .when('/pirates',{
-              templateUrl: 'partials/pirates.html'
-          })
-          .when('/pirateStory',{
-              templateUrl: 'partials/pirateStory.html'
-          })
-          .when('/timeTravel',{
-              templateUrl: 'partials/timeTravel.html'
-          })
-          .when('/timeTravelStory',{
-              templateUrl: 'partials/timeTravelStory.html'
-          })
-          .when('/roadTrip',{
-              templateUrl: 'partials/roadTrip.html'
-          })
-          .when('/ghosts',{
-              templateUrl: 'partials/ghosts.html'
-          })
-          .when('/roadTripStory',{
-              templateUrl: 'partials/roadTripStory.html'
-          })
-          .when('/ghostStory',{
-              templateUrl: 'partials/ghostStory.html'
-          })
-          .otherwise({
-            redirectTo: '/'
-          });
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.5/angular-route.min.js"></script>
+<script>
+//  inject the ngRoute dependency in the module.
+var myApp = angular.module('myApp', ['ngRoute']);
+//  use the config method to set up routing:
+  myApp.config(function ($routeProvider) {
+    $routeProvider
+      .when('/',{
+          templateUrl: 'partials/home.html'
+      })
+      .when('/pirates',{
+          templateUrl: 'partials/pirates.html'
+      })
+      .when('/pirateStory',{
+          templateUrl: 'partials/pirateStory.html'
+      })
+      .when('/timeTravel',{
+          templateUrl: 'partials/timeTravel.html'
+      })
+      .when('/timeTravelStory',{
+          templateUrl: 'partials/timeTravelStory.html'
+      })
+      .when('/roadTrip',{
+          templateUrl: 'partials/roadTrip.html'
+      })
+      .when('/ghosts',{
+          templateUrl: 'partials/ghosts.html'
+      })
+      .when('/roadTripStory',{
+          templateUrl: 'partials/roadTripStory.html'
+      })
+      .when('/ghostStory',{
+          templateUrl: 'partials/ghostStory.html'
+      })
+      .otherwise({
+        redirectTo: '/'
       });
-      
-      myApp.factory('pirateFactory', function (){
-          // The factory is nothing more than a function that returns an object
-        var pirates = [];
-        var factory = {};
-        // Add a getStudents key to the factory object with a value of a function.
-        factory.getPirates = function (callback){
-            // Pass the students to a callback to be used by whoever calls the method
-            callback(pirates);
-        }
-        factory.addPirate = function(pirate){
-          pirates.push(pirate);
-        }
-          // Most important step: return the object so it can be used by the rest of our angular code
-        return factory;
-      });
-      myApp.factory('timeTravelFactory', function (){
-          // The factory is nothing more than a function that returns an object
-        var timeTravels = [];
-        var factory = {};
-        // Add a getStudents key to the factory object with a value of a function.
-        factory.getTimeTravels = function (callback){
-            // Pass the students to a callback to be used by whoever calls the method
-            callback(timeTravels);
-        }
-        factory.addTimeTravel = function(timeTravel){
-          timeTravels.push(timeTravel);
-        }
-          // Most important step: return the object so it can be used by the rest of our angular code
-        return factory;
-      });
-      myApp.factory('roadTripFactory', function (){
-          // The factory is nothing more than a function that returns an object
-        var roadTrips = [];
-        var factory = {};
-        // Add a getStudents key to the factory object with a value of a function.
-        factory.getRoadTrips = function (callback){
-            // Pass the students to a callback to be used by whoever calls the method
-            callback(roadTrips);
-        }
-        factory.addRoadTrip = function(roadTrip){
-          roadTrips.push(roadTrip);
-        }
-          // Most important step: return the object so it can be used by the rest of our angular code
-        return factory;
-      });
-      myApp.factory('ghostFactory', function (){
-          // The factory is nothing more than a function that returns an object
-        var ghosts = [];
-        var factory = {};
-        // Add a getStudents key to the factory object with a value of a function.
-        factory.getGhosts = function (callback){
-            // Pass the students to a callback to be used by whoever calls the method
-            callback(ghosts);
-        }
-        factory.addGhost = function(ghost){
-          ghosts.push(ghost);
-        }
-          // Most important step: return the object so it can be used by the rest of our angular code
-        return factory;
-      });
+  });
+  
+  myApp.factory('pirateFactory', function (){
+      // The factory is nothing more than a function that returns an object
+    var pirates = [];
+    var factory = {};
+    // Add a getStudents key to the factory object with a value of a function.
+    factory.getPirates = function (callback){
+        // Pass the students to a callback to be used by whoever calls the method
+        callback(pirates);
+    }
+    factory.addPirate = function(pirate){
+      pirates.push(pirate);
+      console.log(pirate);
+    }
+      // return the object so it can be used by the rest of our angular code
+    return factory;
+  });
 
-      myApp.controller('piratesController', function ($scope, pirateFactory, $location){
-        
-        $scope.newPirate = {};
-        $scope.pirates = [];
-        pirateFactory.getPirates(function (data){
-            $scope.pirates = data;
-        })
+  myApp.factory('timeTravelFactory', function (){
+      // The factory is nothing more than a function that returns an object
+    var timeTravels = [];
+    var factory = {};
+    // Add a getStudents key to the factory object with a value of a function.
+    factory.getTimeTravels = function (callback){
+        // Pass the students to a callback to be used by whoever calls the method
+        callback(timeTravels);
+    }
+    factory.addTimeTravel = function(timeTravel){
+      timeTravels.push(timeTravel);
+    }
+      // Most important step: return the object so it can be used by the rest of our angular code
+    return factory;
+  });
 
-        $scope.addPirate = function(){
-          console.log($scope.newPirate);
-          pirateFactory.addPirate($scope.newPirate);
-          $location.path('/pirateStory')
-        }
-      });
-      myApp.controller('roadTripsController', function ($scope, roadTripFactory, $location){
-        
-        $scope.newRoadTrip = {};
-        $scope.roadTrips = [];
-        roadTripFactory.getRoadTrips(function (data){
-            $scope.roadTrips = data;
-        })
+  myApp.factory('roadTripFactory', function (){
+      // The factory is nothing more than a function that returns an object
+    var roadTrips = [];
+    var factory = {};
+    // Add a getStudents key to the factory object with a value of a function.
+    factory.getRoadTrips = function (callback){
+        // Pass the students to a callback to be used by whoever calls the method
+        callback(roadTrips);
+    }
+    factory.addRoadTrip = function(roadTrip){
+      roadTrips.push(roadTrip);
+    }
+      // Most important step: return the object so it can be used by the rest of our angular code
+    return factory;
+  });
 
-        $scope.addRoadTrip = function(){
-          console.log($scope.newRoadTrip);
-          roadTripFactory.addRoadTrip($scope.newRoadTrip);
-          $location.path('/roadTripStory')
-        }
-      });
-      myApp.controller('timeTravelsController', function ($scope, timeTravelFactory, $location){
-        
-        $scope.newTimeTravel = {};
-        $scope.timeTravels = [];
-        timeTravelFactory.getTimeTravels(function (data){
-            $scope.timeTravels = data;
-        })
+  myApp.factory('ghostFactory', function (){
+      // The factory is nothing more than a function that returns an object
+    var ghosts = [];
+    var factory = {};
+    // Add a getStudents key to the factory object with a value of a function.
+    factory.getGhosts = function (callback){
+        // Pass the students to a callback to be used by whoever calls the method
+        callback(ghosts);
+    }
+    factory.addGhost = function(ghost){
+      ghosts.push(ghost);
+    }
+      // Most important step: return the object so it can be used by the rest of our angular code
+    return factory;
+  });
 
-        $scope.addTimeTravel = function(){
-          console.log($scope.newTimeTravel);
-          timeTravelFactory.addTimeTravel($scope.newTimeTravel);
-          $location.path('/timeTravelStory')
-        }
-      });
-
-      myApp.controller('ghostsController', function ($scope, ghostFactory, $location){
-        
-        $scope.newGhost = {};
-        $scope.ghosts = [];
-        ghostFactory.getGhosts(function (data){
-            $scope.ghosts = data;
-        })
-
-        $scope.addGhost = function(){
-          console.log($scope.newGhost);
-          ghostFactory.addGhost($scope.newGhost);
-          $location.path('/ghostStory')
-        }
-      });
-    //  build the controllers
-      myApp.controller('view1Controller', function ($scope) {
-      });
-
-      myApp.controller('view2Controller', function ($scope, pirateFactory) {
-        $scope.pirates = [];
-        pirateFactory.getPirates(function (data){
+  myApp.controller('piratesController', function ($scope, pirateFactory, $location){
+    
+    $scope.newPirate = {};
+    $scope.pirates = [];
+    pirateFactory.getPirates(function (data){
         $scope.pirates = data;
-        })
-      });
-      myApp.controller('view3Controller', function ($scope, ghostFactory) {
-        $scope.ghosts = [];
-        ghostFactory.getGhosts(function (data){
-        $scope.ghosts = data;
-        })
-      });
-      myApp.controller('view4Controller', function ($scope, roadTripFactory) {
-        $scope.roadTrips = [];
-        roadTripFactory.getRoadTrips(function (data){
+    })
+
+    $scope.addPirate = function(){
+      console.log($scope.newPirate);
+      pirateFactory.addPirate($scope.newPirate);
+      $location.path('/pirateStory')
+    }
+  });
+
+  myApp.controller('roadTripsController', function ($scope, roadTripFactory, $location){
+    
+    $scope.newRoadTrip = {};
+    $scope.roadTrips = [];
+    roadTripFactory.getRoadTrips(function (data){
         $scope.roadTrips = data;
-        })
-      });
-      myApp.controller('view5Controller', function ($scope, timeTravelFactory) {
-        $scope.timeTravels = [];
-        timeTravelFactory.getTimeTravels(function (data){
+    })
+
+    $scope.addRoadTrip = function(){
+      console.log($scope.newRoadTrip);
+      roadTripFactory.addRoadTrip($scope.newRoadTrip);
+      $location.path('/roadTripStory')
+    }
+  });
+
+  myApp.controller('timeTravelsController', function ($scope, timeTravelFactory, $location){
+    
+    $scope.newTimeTravel = {};
+    $scope.timeTravels = [];
+    timeTravelFactory.getTimeTravels(function (data){
         $scope.timeTravels = data;
-        })
-      });
-    </script>
+    })
+
+    $scope.addTimeTravel = function(){
+      console.log($scope.newTimeTravel);
+      timeTravelFactory.addTimeTravel($scope.newTimeTravel);
+      $location.path('/timeTravelStory')
+    }
+  });
+
+  myApp.controller('ghostsController', function ($scope, ghostFactory, $location){
+    
+    $scope.newGhost = {};
+    $scope.ghosts = [];
+    ghostFactory.getGhosts(function (data){
+        $scope.ghosts = data;
+    })
+
+    $scope.addGhost = function(){
+      console.log($scope.newGhost);
+      ghostFactory.addGhost($scope.newGhost);
+      $location.path('/ghostStory')
+    }
+  });
+
+//  build the controllers
+  myApp.controller('view1Controller', function ($scope) {
+  });
+
+  myApp.controller('view2Controller', function ($scope, pirateFactory) {
+    $scope.pirates = [];
+    pirateFactory.getPirates(function (data){
+    $scope.pirates = data;
+    })
+  });
+  myApp.controller('view3Controller', function ($scope, ghostFactory) {
+    $scope.ghosts = [];
+    ghostFactory.getGhosts(function (data){
+    $scope.ghosts = data;
+    })
+  });
+  myApp.controller('view4Controller', function ($scope, roadTripFactory) {
+    $scope.roadTrips = [];
+    roadTripFactory.getRoadTrips(function (data){
+    $scope.roadTrips = data;
+    })
+  });
+  myApp.controller('view5Controller', function ($scope, timeTravelFactory) {
+    $scope.timeTravels = [];
+    timeTravelFactory.getTimeTravels(function (data){
+    $scope.timeTravels = data;
+    })
+  });
+
+</script>
+
 <style>
 ul {
     list-style-type: none;
@@ -212,6 +221,7 @@ li {
     padding-left: 50px;
 }
 </style>
+
   </head>
 
 <body>
